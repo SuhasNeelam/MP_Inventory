@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Product = require('./product')
+const Sale = require('./sale')
 const bodyParser = require('body-parser')
 
 router.use(bodyParser.urlencoded({ extended: false }))
@@ -86,6 +87,16 @@ router.post('/editProductFinal', (req, res) => {
     })
         .catch(err => console.log("Updation Error"))
 })
+
+router.get('/updateSales', async (req, res) => {
+    console.log("UpdSales")
+    try {
+        res.render("updateSales.ejs")
+    } catch (err) {
+        res.status(500).json({ message: err.message })
+    }
+})
+
 
 
 module.exports = router

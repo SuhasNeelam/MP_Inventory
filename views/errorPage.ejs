@@ -7,24 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css" />
+    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css" />
     <!-- Theme style -->
-    <link rel="stylesheet" href="/dist/css/adminlte.min.css" />
+    <link rel="stylesheet" href="dist/css/adminlte.min.css" />
     <!-- Google Font: Source Sans Pro -->
     <link
       href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"
       rel="stylesheet"
     />
-    <style>
-      strong {
-        display: block;
-        margin: 8px;
-        font-size: large;
-      }
-      input {
-        display: inline;
-      }
-    </style>
   </head>
   <body class="hold-transition sidebar-mini">
     <div class="wrapper">
@@ -67,7 +57,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="/sale" class="nav-link">
                 <i class="nav-icon far fa-circle text-info"></i>
                 <p class="text">Sales Details</p>
               </a>
@@ -88,60 +78,9 @@
           <h1>Fashion Feet Inventory Management</h1>
         </section>
 
-        <section class="content">
-          <div class="card" style="width: 50%">
-            <div class="card-header bg-info">
-              <strong>Update Stock Details</strong>
-            </div>
-            <form action="/editProductFinal" class="form" method="POST">
-              <strong>Product ID : <%=product.product_id%></strong>
-              <strong>Brand : <%=product.brand%></strong>
-              <strong>Category : <%=product.category%></strong>
-              <strong>Name : <%=product.name%></strong>
-              <strong>Size : <%=product.size%></strong>
-              <strong>Old Stock : <%=product.quantity%></strong>
-              <strong for="quantity">New Stock</strong>
-              <input
-                class="form-control"
-                style="width: 50%; margin-left: 5px"
-                type="text"
-                placeholder="New Stock"
-                name="quantity"
-                required
-              />
-              <strong>Old Cost Price : <%=product.cost_price%></strong>
-              <strong for="cost_price">New Cost Price</strong>
-              <input
-                class="form-control"
-                style="width: 50%; margin-left: 5px"
-                type="text"
-                placeholder="New Cost Price"
-                name="cost_price"
-                required
-              />
-              <strong>Old Selling Price : <%=product.selling_price%></strong>
-              <strong for="selling_price">New Selling Price</strong>
-              <input
-                class="form-control"
-                style="width: 50%; margin-left: 5px"
-                type="text"
-                placeholder="New Selling Price"
-                name="selling_price"
-                required
-              />
-              <input
-                type="none"
-                name="_id"
-                style="visibility: hidden"
-                value="<%=product._id%>"
-              />
-              <input
-                class="btn btn-success"
-                style="margin: 5px"
-                type="submit"
-                value="Submit"
-              />
-            </form>
+        <section>
+          <div class="card">
+            <h2 style="text-align: center"><%=error.message%></h2>
           </div>
         </section>
       </div>

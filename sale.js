@@ -8,7 +8,6 @@ const saleSchema = new mongoose.Schema({
     product_id: {
         type: String,
         required: true,
-        unique: true
     },
     unit_price: {
         type: Number,
