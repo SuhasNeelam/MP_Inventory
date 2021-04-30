@@ -26,10 +26,3 @@ app.use('/', productsRouter)
 app.use('/sale', salesRouter)
 
 app.listen(3000, () => console.log('server started'))
-
-// app.get("/", (req, res) => {
-//   res.render(
-//     "C:/Users/asus/OneDrive/Desktop/All_Web/Proj/InventoryProj/views/home.ejs"
-//   )
-// })
-

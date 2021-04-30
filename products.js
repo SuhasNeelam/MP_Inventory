@@ -98,6 +98,5 @@ router.get('/updateSales', async (req, res) => {
 })
 
 
-
 module.exports = router
 

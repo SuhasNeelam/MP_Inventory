@@ -1,9 +1,24 @@
 const express = require('express')
+const app = express()
 const router = express.Router()
 const Sale = require('./sale')
 const Product = require('./product')
 const bodyParser = require('body-parser')
 const axios = require('axios')
+const puppeteer = require('puppeteer')
+// const pdf = require("pdf-creator-node");
+// const fs = require("fs");
+// const path = require('path')
+// const html = fs.readFileSync(path.join(__dirname, "./template.hbs"), "utf8")
+
+// app.use(express.static(path.join(__dirname, '/public')))
+
+
+// const options = {
+//     format: "A4",
+//     orientation: "portrait",
+//     border: "10mm"
+// }
 
 router.use(bodyParser.urlencoded({ extended: false }))
 
@@ -36,8 +51,10 @@ router.post('/', async (req, res) => {
     try {
         const product = await Product.findOne({ product_id: req.body.product_id })
         if (product != null) {
+            const date = req.body.purchase_date
+            console.log(date)
             const sale = new Sale({
-                purchase_date: req.body.purchase_date,
+                purchase_date: date,
                 product_id: req.body.product_id,
                 unit_price: product.selling_price,
                 quantity: req.body.quantity,
@@ -60,7 +77,7 @@ router.post('/', async (req, res) => {
             }
             else {
                 const error = {
-                    message: "No specified stock"
+                    message: "Shortage"
                 }
                 res.render('errorPage.ejs', { error: error })
             }
@@ -76,5 +93,47 @@ router.post('/', async (req, res) => {
         res.status(500).json({ message: err.message })
     }
 })
+
+const createPdf = async () => {
+    const browser = await puppeteer.launch()
+    const page = await browser.newPage()
+    const options = {
+        path: 'output.pdf',
+        format: 'A4'
+    }
+
+    await page.goto('http://localhost:3000/sale', { waitUntil: 'networkidle2' })
+    await page.pdf(options)
+
+    await browser.close()
+}
+
+router.get('/pdf', async (req, res) => {
+    console.log("download")
+    try {
+        // const sales = await Sale.find().lean()
+        // const document = {
+        //     html: html,
+        //     data: {
+        //         sales: sales,
+        //     },
+        //     path: "./output.pdf",
+        //     type: "",
+        // }
+        // pdf
+        //     .create(document, options)
+        //     .then((res) => {
+        //         console.log(res)
+        //     })
+        //     .catch((error) => {
+        //         console.error(error)
+        //     })
+        createPdf()
+        res.redirect('/')
+    } catch (err) {
+        res.status(500).json({ message: err.message })
+    }
+})
+
 
 module.exports = router

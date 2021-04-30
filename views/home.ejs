@@ -136,9 +136,10 @@
 					<td>
 						<% let style = products[i].quantity>50 ? "bg-success" : "bg-danger" %>
 						<div class="progress progress-xs">
-						<div
+						<% let width = products[i].quantity>100 ? 100 : products[i].quantity%>
+              <div
 							class="progress-bar <%=style%>"
-							style="width: <%=products[i].quantity%>%"
+							style="width: <%=width%>%"
 						></div>
 						</div>
 						<small><%= (products)[i].quantity%></small>
